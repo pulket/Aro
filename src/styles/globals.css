@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  font-family:
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  --panel: rgba(248, 246, 242, 0.74);
+  --surface: rgba(255, 255, 255, 0.56);
+  --surface-strong: rgba(255, 255, 255, 0.78);
+  --surface-code: rgba(255, 255, 255, 0.62);
+  --ink: #1e1e1d;
+  --ink-soft: #3d3b38;
+  --muted: #716d67;
+  --faint: #aaa39a;
+  --rule: rgba(31, 30, 28, 0.13);
+  --rule-strong: rgba(31, 30, 28, 0.21);
+  --accent: #f35f5c;
+  --accent-hot: #ff746e;
+  --accent-strong: #c7403f;
+  --accent-gradient: linear-gradient(180deg, #ff7b72 0%, #f05c58 100%);
+  --accent-soft: rgba(243, 95, 92, 0.12);
+  --accent-rule: rgba(243, 95, 92, 0.42);
+  --code: #4b3936;
+  --success: #34a853;
+  --success-soft: rgba(52, 168, 83, 0.11);
+  --success-rule: rgba(52, 168, 83, 0.28);
+  --warning: #a96900;
+  --warning-soft: rgba(255, 193, 7, 0.16);
+  --warning-rule: rgba(255, 193, 7, 0.34);
+  --danger: #dc3d3d;
+  --danger-soft: rgba(220, 61, 61, 0.12);
+  --danger-rule: rgba(220, 61, 61, 0.3);
+  --shadow-window: 0 28px 70px rgba(32, 29, 26, 0.28), 0 6px 20px rgba(32, 29, 26, 0.12);
+  --shadow-control: 0 1px 1px rgba(255, 255, 255, 0.75) inset, 0 8px 22px rgba(32, 29, 26, 0.06);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+::selection {
+  background: rgba(243, 95, 92, 0.2);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(31, 30, 28, 0.18);
+  border-radius: 999px;
+}
+
+.app-shell {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(246, 243, 238, 0.72)),
+    rgba(247, 245, 241, 0.72);
+  box-shadow:
+    0 30px 80px rgba(32, 29, 26, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+}
+
+.settings-shell {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 243, 238, 0.92)),
+    rgba(247, 245, 241, 0.94);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+}
+
+.app-shell::before,
+.settings-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 42%);
+}
+
+.app-shell::after,
+.settings-shell::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  pointer-events: none;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.app-shell > *,
+.settings-shell > * {
+  position: relative;
+}
+
+@keyframes slide-in-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in-from-top 150ms ease-out;
+}
+
+.soft-control {
+  border: 1px solid var(--rule);
+  background: rgba(255, 255, 255, 0.56);
+  box-shadow: var(--shadow-control);
+}
+
+.soft-control:hover {
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.accent-fill {
+  background: var(--accent-gradient);
+  color: #fff;
+}
+
+.accent-fill:hover {
+  filter: brightness(1.02);
+}
+
+.settings-section {
+  scroll-margin-top: 20px;
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.54);
+  padding: 16px;
+  box-shadow: var(--shadow-control);
+}
+
+.settings-pill {
+  height: 34px;
+  border-radius: 11px;
+  border: 1px solid var(--rule);
+  background: rgba(255, 255, 255, 0.58);
+  padding: 0 12px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.settings-pill:hover {
+  background: rgba(0, 0, 0, 0.04);
+}

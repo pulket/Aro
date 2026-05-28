@@ -1,0 +1,67 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Aro",
+  "version": "0.2.0",
+  "identifier": "in.pulkit.aro",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "macOSPrivateApi": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Aro",
+        "visible": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "width": 860,
+        "height": 178,
+        "resizable": false,
+        "transparent": true,
+        "center": true,
+        "shadow": true
+      },
+      {
+        "label": "settings",
+        "title": "Aro Settings",
+        "url": "index.html?window=settings",
+        "visible": false,
+        "decorations": true,
+        "alwaysOnTop": false,
+        "skipTaskbar": false,
+        "width": 880,
+        "height": 640,
+        "minWidth": 760,
+        "minHeight": 540,
+        "resizable": true,
+        "transparent": false,
+        "center": true,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src 'self' https://api.x.ai https://api.openai.com https://generativelanguage.googleapis.com https://api.deepseek.com http://localhost:*; style-src 'self' 'unsafe-inline'; img-src 'self' asset: https://asset.localhost"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "13.0",
+      "infoPlist": "Info.plist"
+    }
+  }
+}
