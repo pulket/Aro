@@ -74,7 +74,14 @@ export default function CommandInput({
   };
 
   const fileCount = finderContext?.selected_files?.length ?? 0;
+  const visibleItemCount = finderContext?.directory_items?.length ?? 0;
   const dirName = finderContext?.current_directory?.split("/").filter(Boolean).pop() ?? "Desktop";
+  const fileLabel =
+    fileCount > 0
+      ? `${fileCount} selected`
+      : visibleItemCount > 0
+        ? `${visibleItemCount} visible`
+        : "No files";
 
   return (
     <section className="relative flex h-[178px] flex-col px-6 py-5">
@@ -101,7 +108,7 @@ export default function CommandInput({
 
           <span className="soft-control flex items-center gap-2 rounded-[12px] px-3 py-2">
             <FileText size={14} />
-            {fileCount} file{fileCount === 1 ? "" : "s"}
+            {fileLabel}
           </span>
         </div>
 
@@ -140,7 +147,7 @@ export default function CommandInput({
         <span className="flex min-w-0 items-center gap-2 truncate">
           <Sparkles size={14} className="text-[var(--accent)]" />
           <span className="truncate">
-            Try: "rename images to product shots" or "compress this folder"
+            Try: "rename selected file to receipt.txt" or "compress this folder"
           </span>
         </span>
         <button

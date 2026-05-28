@@ -9,12 +9,33 @@ mod commands;
 
 const TRAY_ID: &str = "aro";
 
+#[cfg(desktop)]
+fn escape_shortcut() -> Shortcut {
+    Shortcut::new(None, Code::Escape)
+}
+
+#[cfg(desktop)]
+fn set_escape_capture(app: &tauri::AppHandle, enabled: bool) {
+    let shortcut = escape_shortcut();
+    let shortcuts = app.global_shortcut();
+
+    if enabled {
+        if !shortcuts.is_registered(shortcut) {
+            let _ = shortcuts.register(shortcut);
+        }
+    } else if shortcuts.is_registered(shortcut) {
+        let _ = shortcuts.unregister(shortcut);
+    }
+}
+
 fn show_main_window(app: &tauri::AppHandle) {
     if let Some(window) = app.get_webview_window("main") {
         let _ = window.show();
         let _ = commands::window::position_window_below_finder(&window);
         let _ = window.show();
         let _ = window.set_focus();
+        #[cfg(desktop)]
+        set_escape_capture(app, true);
         let _ = window.emit("aro:shown", ());
     }
 }
@@ -22,6 +43,8 @@ fn show_main_window(app: &tauri::AppHandle) {
 fn hide_main_window(app: &tauri::AppHandle) {
     if let Some(window) = app.get_webview_window("main") {
         let _ = window.hide();
+        #[cfg(desktop)]
+        set_escape_capture(app, false);
     }
 }
 
@@ -140,6 +163,7 @@ pub fn run() {
 
                 let shortcut = Shortcut::new(Some(Modifiers::CONTROL), Code::Space);
                 let handler_shortcut = shortcut;
+                let handler_escape_shortcut = escape_shortcut();
 
                 app.handle().plugin(
                     tauri_plugin_global_shortcut::Builder::new()
@@ -150,6 +174,15 @@ pub fn run() {
 
                             if triggered_shortcut == &handler_shortcut {
                                 toggle_main_window(app);
+                                return;
+                            }
+
+                            if triggered_shortcut == &handler_escape_shortcut {
+                                if let Some(window) = app.get_webview_window("main") {
+                                    if window.is_visible().unwrap_or(false) {
+                                        hide_main_window(app);
+                                    }
+                                }
                             }
                         })
                         .build(),

@@ -268,13 +268,13 @@ export default function Settings({ settings, onBack, onOpenOnboarding, onSave }:
               Choose your AI provider and configure it.
             </p>
 
-            <div className="mt-5 rounded-[14px] border border-[var(--rule)] bg-white/[0.58] p-1">
-              <div className="grid grid-cols-6 gap-1">
+            <div className="mt-5 rounded-[14px] border border-[var(--rule)] bg-white/[0.58] p-1.5">
+              <div className="flex flex-wrap gap-1.5">
                 {PROVIDERS.map((provider) => {
                   const selected = provider.id === draft.activeProvider;
                   return (
                     <button
-                      className={`h-10 rounded-[11px] px-2 text-center text-[13px] font-medium transition focus:outline-none focus:ring-2 focus:ring-[var(--accent)] ${
+                      className={`h-10 min-w-[112px] flex-1 rounded-[11px] px-3 text-center text-[13px] font-medium transition focus:outline-none focus:ring-2 focus:ring-[var(--accent)] ${
                         selected
                           ? "accent-fill shadow-[0_8px_18px_rgba(247,97,92,0.24)]"
                           : "text-[var(--ink-soft)] hover:bg-black/[0.04]"
@@ -290,7 +290,7 @@ export default function Settings({ settings, onBack, onOpenOnboarding, onSave }:
               </div>
             </div>
 
-            <div className="mt-4 grid grid-cols-[1fr_210px] gap-5">
+            <div className="mt-4 grid grid-cols-1 gap-5 xl:grid-cols-[1fr_210px]">
               <div className="rounded-[18px] border border-[var(--rule)] bg-white/[0.58] p-4">
                 <div className="mb-4">
                   <p className="text-sm font-semibold">{activeProvider.name} provider</p>
@@ -411,7 +411,7 @@ export default function Settings({ settings, onBack, onOpenOnboarding, onSave }:
               System commands, unknown actions, network calls, and destructive operations always
               require review.
             </p>
-            <div className="mt-4 grid grid-cols-3 gap-3">
+            <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
               {AUTO_RUN_OPTIONS.map((option) => {
                 const enabled = draft.autoRunCategories.includes(option.category);
                 return (
@@ -609,8 +609,8 @@ export default function Settings({ settings, onBack, onOpenOnboarding, onSave }:
               General
             </p>
             <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">
-              Control + Space summons Aro below the front Finder window. Escape works when Aro has
-              focus; the visible Hide button is the reliable close control.
+              Control + Space summons Aro below the front Finder window. Escape hides Aro while it
+              is visible, even if another app accidentally owns focus.
             </p>
           </section>
         </div>

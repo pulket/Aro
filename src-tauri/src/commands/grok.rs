@@ -9,7 +9,7 @@ const CUSTOM_BASE_URL: &str = "http://localhost:11434/v1";
 const OLLAMA_MODEL: &str = "gemma3:4b";
 const OPENAI_MODEL: &str = "gpt-4.1";
 const GEMINI_MODEL: &str = "gemini-3-flash-preview";
-const DEEPSEEK_MODEL: &str = "deepseek-chat";
+const DEEPSEEK_MODEL: &str = "deepseek-v4-flash";
 
 #[derive(Serialize)]
 struct GrokRequest {

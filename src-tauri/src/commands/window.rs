@@ -173,7 +173,18 @@ pub fn hide_main_window(app: tauri::AppHandle) -> Result<(), String> {
         .get_webview_window("main")
         .ok_or_else(|| "Aro main window is not available".to_string())?;
 
-    window.hide().map_err(|error| error.to_string())
+    window.hide().map_err(|error| error.to_string())?;
+
+    #[cfg(desktop)]
+    {
+        use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Shortcut};
+        let shortcut = Shortcut::new(None, Code::Escape);
+        if app.global_shortcut().is_registered(shortcut) {
+            let _ = app.global_shortcut().unregister(shortcut);
+        }
+    }
+
+    Ok(())
 }
 
 #[tauri::command]
@@ -185,6 +196,16 @@ pub fn show_main_window(app: tauri::AppHandle) -> Result<(), String> {
     window.show().map_err(|error| error.to_string())?;
     let _ = position_window_below_finder(&window);
     window.set_focus().map_err(|error| error.to_string())?;
+
+    #[cfg(desktop)]
+    {
+        use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Shortcut};
+        let shortcut = Shortcut::new(None, Code::Escape);
+        if !app.global_shortcut().is_registered(shortcut) {
+            let _ = app.global_shortcut().register(shortcut);
+        }
+    }
+
     Ok(())
 }
 
