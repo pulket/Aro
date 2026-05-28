@@ -1,0 +1,61 @@
+name: Bug report
+description: Report a reproducible Aro problem
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not paste API keys, private file paths, or sensitive command output.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What went wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the Finder state, selected files, and prompt if safe to share.
+      placeholder: |
+        1. Open Finder at ...
+        2. Select ...
+        3. Ask Aro ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Aro version
+      placeholder: "v0.2.0"
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "macOS 15.x"
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Provider
+      options:
+        - Grok
+        - OpenAI
+        - Gemini
+        - DeepSeek
+        - Local
+        - Custom
+        - Not provider-related
